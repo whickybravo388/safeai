@@ -13,12 +13,14 @@ Thank you for your interest in contributing to SafeAI! This document provides gu
 ### Development Setup
 
 1. **Fork the repository**
+
    ```bash
    git clone https://github.com/whickybravo388/safeai.git
    cd safeai
    ```
 
 2. **Install in development mode**
+
    ```bash
    pip install -e .
    pip install -e ".[dev]"
@@ -99,6 +101,7 @@ git commit -m "feat: add new security rule for XSS detection"
 ```
 
 Use conventional commit messages:
+
 - `feat:` for new features
 - `fix:` for bug fixes
 - `docs:` for documentation
@@ -129,11 +132,11 @@ Then create a pull request on GitHub.
 def detect_xss_vulnerability(code: str, ast_tree: Optional[ast.AST] = None) -> Optional[Dict[str, Any]]:
     """
     Detect potential XSS vulnerabilities in code.
-    
+
     Args:
         code: Source code to analyze
         ast_tree: Parsed AST tree (optional)
-        
+
     Returns:
         Dictionary with vulnerability details if found, None otherwise
     """
@@ -154,10 +157,10 @@ def test_detect_xss_in_script_tag():
     # Arrange
     rule = XSSRule()
     code = "<script>alert('xss')</script>"
-    
+
     # Act
     result = rule.check(code)
-    
+
     # Assert
     assert result is not None
     assert result["id"] == "XSS001"
@@ -172,12 +175,12 @@ def test_detect_xss_in_script_tag():
 
 class XSSRule(BaseRule):
     """Rule XSS001: Detect potential XSS vulnerabilities."""
-    
+
     id = "XSS001"
     description = "Potential XSS vulnerability detected"
     severity = "HIGH"
     recommendation = "Sanitize user input and use proper escaping"
-    
+
     def check(self, code: str, ast_tree: Optional[ast.AST] = None) -> Optional[Dict[str, Any]]:
         """Check for XSS vulnerabilities."""
         # Your detection logic here
@@ -211,23 +214,23 @@ def get_rules() -> List[BaseRule]:
 
 class TestXSSRule:
     """Test cases for XSSRule."""
-    
+
     def test_xss_detection(self):
         """Test detection of XSS vulnerabilities."""
         rule = XSSRule()
         code = "<script>alert('xss')</script>"
         result = rule.check(code)
-        
+
         assert result is not None
         assert result["id"] == "XSS001"
         assert result["severity"] == "HIGH"
-    
+
     def test_no_xss(self):
         """Test code without XSS vulnerabilities."""
         rule = XSSRule()
         code = "print('hello world')"
         result = rule.check(code)
-        
+
         assert result is None
 ```
 
@@ -235,21 +238,25 @@ class TestXSSRule:
 
 Add your rule to `docs/rules.md`:
 
-```markdown
+````markdown
 ### XSS001: XSS Vulnerability
 
 **Description**: Detects potential XSS vulnerabilities...
 
 **Example Vulnerable Code**:
+
 ```python
 # Vulnerable code
 ```
+````
 
 **Safe Alternative**:
+
 ```python
 # Safe code
 ```
-```
+
+````
 
 ## 🧪 Testing Guidelines
 
@@ -265,19 +272,19 @@ Add your rule to `docs/rules.md`:
 ```python
 class TestYourFeature:
     """Test cases for YourFeature."""
-    
+
     def test_basic_functionality(self):
         """Test basic functionality."""
         pass
-    
+
     def test_edge_cases(self):
         """Test edge cases."""
         pass
-    
+
     def test_error_conditions(self):
         """Test error conditions."""
         pass
-```
+````
 
 ### Fixtures
 
@@ -320,14 +327,14 @@ def test_rule_with_fixture():
 def analyze_code(self, code: str, file_path: str = "") -> List[Dict[str, Any]]:
     """
     Analyze code string for security vulnerabilities.
-    
+
     Args:
         code: Source code to analyze
         file_path: Optional file path for context
-        
+
     Returns:
         List of security issues found
-        
+
     Example:
         >>> analyzer = CodeAnalyzer()
         >>> issues = analyzer.analyze_code("result = eval('1 + 1')")

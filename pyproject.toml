@@ -1,6 +1,6 @@
 [project]
 name = "safeai-scanner"
-version = "0.1.0"
+version = "0.1.1"
 description = "Security analyzer for AI-generated code"
 readme = "README.md"
 requires-python = ">=3.9"
